@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tunnit sadasosiksi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lindan aikakääntäjä</h1>
+<h2>...ja järjensäästäjä 🤯</h2>
+  <label for="tuntia">Tuntia:</label>
+  <input type="number" id="tuntia" min="0" step="1" placeholder="Syötä tunnit">
+  <label for="minuutit">Minuutit:</label>
+  <input type="number" id="minuutit" min="0" max="59" step="1" placeholder="Syötä minuutit">
+
+  <button onclick="convertTime()">Muunna</button>
+
+  <label for="sadasosat">Tunnin sadasosat:</label>
+  <input type="number" id="sadasosat" min="0" step="0.01" placeholder="esim. 6.65">
+
+  <button onclick="convertHundredths()">Muunna</button>
+
+  <p id="result"></p>
+
+  <script>
+    function convertTime() {
+      const tuntiaInput = document.getElementById('tuntia').value;
+      const minuutitInput = document.getElementById('minuutit').value;
+
+      // Validate input values
+      if (tuntiaInput === "" || minuutitInput === "") {
+        document.getElementById('result').innerText = "Syötä sekä tunnit että minuutit.";
+        return;
+      }
+
+      const tuntia = parseInt(tuntiaInput);
+      const minuutit = parseInt(minuutitInput);
+
+      if (isNaN(tuntia) || isNaN(minuutit) || minuutit < 0 || minuutit > 59) {
+        document.getElementById('result').innerText = "Virheellinen syöte. Syötä kelvolliset tunnit ja minuutit.";
+        return;
+      }
+
+      // Calculate the total time in minutes
+      const totalMinuutit = tuntia * 60 + minuutit;
+
+      // Calculate the equivalent value in hundredths of an hour
+      const sadasosat = totalMinuutit / 60;
+
+      // Display the result to the user
+      document.getElementById('result').innerText = `${tuntia} tuntia ja ${minuutit} minuuttia on yhtä kuin ${sadasosat.toFixed(2)} tunnin sadasosaa.`;
+    }
+
+    function convertHundredths() {
+      const sadasosatInput = document.getElementById('sadasosat').value;
+
+      // Validate input value
+      if (sadasosatInput === "") {
+        document.getElementById('result').innerText = "Syötä tunnin sadasosat.";
+        return;
+      }
+
+      const sadasosat = parseFloat(sadasosatInput);
+
+      if (isNaN(sadasosat) || sadasosat < 0) {
+        document.getElementById('result').innerText = "Virheellinen syöte. Syötä kelvolliset tunnin sadasosat.";
+        return;
+      }
+
+      // Convert sadasosat to minutes
+      const totalMinuutit = sadasosat * 60;
+
+      // Calculate the hours and remaining minutes
+      const tuntia = Math.floor(totalMinuutit / 60);
+      const minuutit = Math.floor(totalMinuutit % 60);
+
+      // Display the result to the user
+      document.getElementById('result').innerText = `${sadasosat} tunnin sadasosaa on yhtä kuin ${tuntia} tuntia ja ${minuutit} minuuttia.`;
+    }
+  </script>
+</body>
+</html>
