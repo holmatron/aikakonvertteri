@@ -11,17 +11,21 @@
 <body>
   <h1>Aikakääntäjä</h1>
 <h2>...ja järjensäästäjä 🤯</h2>
+  <p>
   <label for="tuntia">Tuntia:</label>
   <input type="number" id="tuntia" min="0" step="1" placeholder="Syötä tunnit">
   <label for="minuutit">Minuutit:</label>
   <input type="number" id="minuutit" min="0" max="59" step="1" placeholder="Syötä minuutit">
 
   <button onclick="convertTime()">Muunna</button>
+  </p>
+  <p>
 
   <label for="sadasosat">Tunnin sadasosat:</label>
   <input type="number" id="sadasosat" min="0" step="0.01" placeholder="esim. 6.65">
 
   <button onclick="convertHundredths()">Muunna</button>
+  </p>
 
   <p id="result"></p>
 
